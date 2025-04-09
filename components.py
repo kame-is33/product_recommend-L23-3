@@ -63,26 +63,29 @@ def display_product(result):
 
     st.markdown("以下の商品をご提案いたします。")
 
-    # 「商品名」と「価格」
+    # 1. 「商品名」と「価格」
     st.success(f"""
             商品名：{product['name']}（商品ID: {product['id']}）\n
             価格：{product['price']}
     """)
 
-    # 「商品カテゴリ」と「メーカー」と「ユーザー評価」
-    st.code(f"""
-        商品カテゴリ：{product['category']}\n
-        メーカー：{product['maker']}\n
-        評価：{product['score']}({product['review_number']}件)
-    """, language=None, wrap_lines=True)
-    
-    # 在庫状況を表示
-    if 'stock_status' in product:
-        if product['stock_status'] == '残りわずか':
-            st.warning(f"{ct.STOCK_WARNING_ICON} ご好評につき、在庫数が残りわずかです。購入をご希望の場合、お早めのご注文をおすすめいたします。")
-        elif product['stock_status'] == 'なし':
-            st.error(f"{ct.STOCK_NONE_ICON} 申し訳ございませんが、本商品は在庫切れとなっております。入荷までもうしばらくお待ちください。")
-        # 在庫ありの場合は特に表示しない
+    # 2. 在庫状況を表示
+    stock_status = product.get('stock_status', '')
+    if stock_status == '残りわずか':
+        st.warning(f"{ct.STOCK_WARNING_ICON} ご好評につき、在庫数が残りわずかです。購入をご希望の場合、お早めのご注文をおすすめいたします。")
+    elif stock_status == 'なし':
+        st.error(f"{ct.STOCK_NONE_ICON} 申し訳ございませんが、本商品は在庫切れとなっております。入荷までもうしばらくお待ちください。")
+    else:
+        # 在庫ありの場合は特に何も表示しない
+        pass
+        
+    # 3. 残りわずかもしくはなしの場合のみ「商品カテゴリ」と「メーカー」を表示
+    if stock_status in ['残りわずか', 'なし']:
+        st.code(f"""
+            商品カテゴリ：{product['category']}\n
+            メーカー：{product['maker']}\n
+            評価：{product['score']}({product['review_number']}件)
+        """, language=None, wrap_lines=True)
 
     # 商品画像
     st.image(f"images/products/{product['file_name']}", width=400)
