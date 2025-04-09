@@ -75,6 +75,14 @@ def display_product(result):
         メーカー：{product['maker']}\n
         評価：{product['score']}({product['review_number']}件)
     """, language=None, wrap_lines=True)
+    
+    # 在庫状況を表示
+    if 'stock_status' in product:
+        if product['stock_status'] == '残りわずか':
+            st.warning(f"{ct.STOCK_WARNING_ICON} ご好評につき、在庫数が残りわずかです。購入をご希望の場合、お早めのご注文をおすすめいたします。")
+        elif product['stock_status'] == 'なし':
+            st.error(f"{ct.STOCK_NONE_ICON} 申し訳ございませんが、本商品は在庫切れとなっております。入荷までもうしばらくお待ちください。")
+        # 在庫ありの場合は特に表示しない
 
     # 商品画像
     st.image(f"images/products/{product['file_name']}", width=400)

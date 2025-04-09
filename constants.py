@@ -16,6 +16,11 @@ ERROR_ICON = ":material/error:"
 CHAT_INPUT_HELPER_TEXT = "こちらからお探しの商品の特徴や名前を入力してください。"
 SPINNER_TEXT = "レコメンドする商品の検討中..."
 
+# 在庫状況アイコン
+STOCK_WARNING_ICON = ":warning:"
+STOCK_NONE_ICON = ":x:"
+STOCK_AVAILABLE_ICON = ":white_check_mark:"
+
 
 # ==========================================
 # ログ出力系
