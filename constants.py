@@ -18,7 +18,7 @@ SPINNER_TEXT = "レコメンドする商品の検討中..."
 
 # 在庫状況アイコン
 STOCK_WARNING_ICON = ":material/warning:"
-STOCK_NONE_ICON = ":material/close:"
+STOCK_NONE_ICON = ":material/alert-circle:"  # 変更：丸の中に！マークのアイコンに変更
 STOCK_AVAILABLE_ICON = ":material/check:"
 
 

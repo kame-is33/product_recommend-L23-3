@@ -79,8 +79,15 @@ def display_product(result):
         # 在庫ありの場合は特に何も表示しない
         pass
         
-    # 3. 残りわずかもしくはなしの場合のみ「商品カテゴリ」と「メーカー」を表示
+    # 3. 商品情報を表示（在庫状況に応じて評価を表示するかを分岐）
     if stock_status in ['残りわずか', 'なし']:
+        # 在庫切れまたは残りわずかの場合は、評価を非表示にする
+        st.code(f"""
+            商品カテゴリ：{product['category']}\n
+            メーカー：{product['maker']}
+        """, language=None, wrap_lines=True)
+    else:
+        # 在庫ありの場合は評価も表示する
         st.code(f"""
             商品カテゴリ：{product['category']}\n
             メーカー：{product['maker']}\n
